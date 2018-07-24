@@ -1,0 +1,51 @@
+{
+  "name": "multi-page-app",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "dev": "set NODE_ENV=dev && webpack-dev-server --open --progress  --hot --inline  --watch --mode development",
+    "build": "set NODE_ENV=prod && webpack --mode production",
+    "serve": "http-server ./dist -p 8888 -o",
+    "serve2": "http-server ./dist -p 8888"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxj95719/multi-page-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xxj95719/multi-page-app/issues"
+  },
+  "homepage": "https://github.com/xxj95719/multi-page-app#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.0.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "chalk": "^2.4.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "html-webpack-plugin": "^3.2.0",
+    "html-withimg-loader": "^0.1.16",
+    "http-server": "^0.11.1",
+    "marked": "^0.4.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "ora": "^3.0.0",
+    "postcss-loader": "^2.1.6",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.3"
+  }
+}
