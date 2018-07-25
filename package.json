@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "set NODE_ENV=dev && webpack-dev-server --open --progress  --hot --inline  --watch --mode development",
-    "build": "set NODE_ENV=prod && webpack --mode production",
+    "build": "set NODE_ENV=prod && webpack --mode production --progress",
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"
   },

@@ -25,7 +25,13 @@ HTMLDirs.forEach(page => {
   const htmlPlugin = new HTMLWebpackPlugin({
     filename: `${page}.html`,
     template: path.resolve(__dirname, `../src/${page}/${page}.html`),
-    chunks: [page, 'commons']
+    chunks: ['common', page],
+    minify: {
+      caseSensitive: false, //是否大小写敏感
+      removeComments: true, // 去除注释
+      removeEmptyAttributes: true, // 去除空属性
+      collapseWhitespace: true //是否去除空格
+    }
   })
   HTMLPlugins.push(htmlPlugin)
   Entries[page] = path.resolve(__dirname, `../src/${page}/index.js`)

@@ -1,9 +1,8 @@
+'use strict'
 // 引入基础配置
 const webpackBase = require('./webpack.config.base')
 // 引入 webpack-merge 插件
 const webpackMerge = require('webpack-merge')
-// 引入 webpack
-const webpack = require('webpack')
 // 引入js压缩插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // 引入css压缩插件
