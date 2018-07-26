@@ -1,4 +1,5 @@
 'use strict'
+const webpack = require('webpack')
 // 引入基础配置文件
 const webpackBase = require('./webpack.config.base')
 // 引入 webpack-merge 插件
@@ -15,6 +16,8 @@ module.exports = webpackMerge(webpackBase, {
     overlay: {
       errors: true,
       warnings: true
-    }
+    },
+    hot: true,
+    port: 4396
   }
 })
