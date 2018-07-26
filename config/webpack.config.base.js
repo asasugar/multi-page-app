@@ -54,6 +54,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@': path.resolve(__dirname, '../src')
       // layout: path.resolve(__dirname, '../src/layout/layout'),
     }
   },
@@ -64,8 +65,14 @@ module.exports = {
         test: /\.pug$/,
         use: [
           // 允许文件作为字符串导入
+          // {
+          //   loader: 'raw-loader'
+          // },
           {
-            loader: 'raw-loader'
+            loader: 'html-loader',
+            options: {
+              interpolate: true
+            }
           },
           {
             loader: 'pug-plain-loader',
@@ -116,17 +123,18 @@ module.exports = {
           }
         ]
       },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: {
-      //         name: assetsPath('img/[name].[hash:7].[ext]')
-      //       }
-      //     }
-      //   ]
-      // },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 100000,
+              name: 'static/[name].[ext]'
+            }
+          }
+        ]
+      },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: {
