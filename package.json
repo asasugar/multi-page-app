@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --progress --inline --watch",
+    "dev": "webpack-dev-server --mode development --open --progress --hot --inline --watch",
     "build": "webpack --mode production --progress",
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"

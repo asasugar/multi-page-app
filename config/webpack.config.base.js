@@ -5,8 +5,15 @@ const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 // 抽取 css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// 拷贝static
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 引入多页面文件列表
-const { HTMLDirs, imgOutputPath } = require('./config')
+const {
+  htmlDirs,
+  imgOutputPath,
+  staticSubDirectory,
+  outputPath
+} = require('./config')
 // 通过 html-webpack-plugin 生成的 HTML 集合
 let HTMLPlugins = []
 // 入口文件集合
@@ -17,7 +24,7 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 // 生成多页面的集合
-HTMLDirs.forEach(page => {
+htmlDirs.forEach(page => {
   const htmlPlugin = new HTMLWebpackPlugin({
     filename: `pages/${page}/${page}.html`,
     template: path.resolve(__dirname, `../src/pages/${page}/${page}.html`),
@@ -40,14 +47,14 @@ module.exports = {
   // 输出文件
   output: {
     filename: 'pages/[name]/[name].bundle.[hash].js',
-    path: path.resolve(__dirname, '../dist')
+    path: outputPath
   },
   // 加载器
   module: {
     rules: [
       {
         test: /\.css$/,
-        // exclude: /node_modules/,
+        exclude: /node_modules/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader
@@ -67,7 +74,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: resolve('src/utils/css/main.scss')
+              resources: resolve('src/utils/css/CONST.scss')
             }
           }
         ]
@@ -77,18 +84,17 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader']
       },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            // 打包生成图片的名字
-            name: '[name].[ext]',
-            // 图片的生成路径
-            outputPath: imgOutputPath
-          }
-        }
-      },
+      // {
+      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         name: assetsPath('img/[name].[hash:7].[ext]')
+      //       }
+      //     }
+      //   ]
+      // },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: {
@@ -107,6 +113,14 @@ module.exports = {
       filename: 'pages/[name]/[name].css',
       chunkFilename: '[id].css'
     }),
+    // 拷贝static文件夹
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/static'),
+        to: staticSubDirectory,
+        ignore: ['.*']
+      }
+    ]),
     // 自动生成 HTML 插件
     ...HTMLPlugins
   ]
