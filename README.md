@@ -1,6 +1,6 @@
 # multi-page-app
 
-> 基于 webpack4 的多页应用脚手架（完善中......）
+> 基于 webpack4.x 的多页应用脚手架（完善中......）
 
 ## Build Setup
 
