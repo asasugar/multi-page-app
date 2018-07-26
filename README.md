@@ -17,3 +17,9 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+## 使用指南
+
+> css:采用 scss，并在配置中默认引入 CONST.scss，无需手动引入
+> 模板:采用 pug，[layout]文件为公用部分
+> img 引入方式:

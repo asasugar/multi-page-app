@@ -53,9 +53,9 @@ module.exports = {
     chunkFilename: '[name].js'
   },
   resolve: {
+    extensions: ['.js', '.pug', 'scss'],
     alias: {
       '@': path.resolve(__dirname, '../src')
-      // layout: path.resolve(__dirname, '../src/layout/layout'),
     }
   },
   // 加载器
