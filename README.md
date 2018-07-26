@@ -11,6 +11,7 @@
 
 ## 文件树
 
+```bash
 │ .gitignore
 │ package.json
 │ postcss.config.js
@@ -57,6 +58,7 @@
 │  
 ├─js
 │ ├─jq.js
+```
 
 ## Build Setup
 
