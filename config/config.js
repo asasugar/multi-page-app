@@ -9,7 +9,7 @@ const getFileNameList = path => {
 
 module.exports = {
   htmlDirs: getFileNameList(path.resolve(__dirname, '../src/pages')),
-  devServerOutputPath: '../dist',
+  devServerOutputPath: '../dist/html',
   imgOutputPath: '../dist',
   outputPath: path.resolve(__dirname, '../dist'),
   staticSubDirectory: 'static'

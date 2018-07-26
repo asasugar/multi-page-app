@@ -1,5 +1,6 @@
 // 基础配置,包含了这些环境都可能使用到的配置
 'use strict'
+const webpack = require('webpack')
 const path = require('path')
 // 引入插件
 const HTMLWebpackPlugin = require('html-webpack-plugin')
@@ -26,8 +27,8 @@ function resolve(dir) {
 // 生成多页面的集合
 htmlDirs.forEach(page => {
   const htmlPlugin = new HTMLWebpackPlugin({
-    filename: `pages/${page}/${page}.html`,
-    template: path.resolve(__dirname, `../src/pages/${page}/${page}.html`),
+    filename: `html/${page}.html`,
+    template: path.resolve(__dirname, `../src/pages/${page}/${page}.pug`),
     chunks: ['common', page],
     minify: {
       caseSensitive: false, //是否大小写敏感
@@ -46,12 +47,36 @@ module.exports = {
   devtool: env === 'prod' ? false : 'cheap-module-source-map',
   // 输出文件
   output: {
-    filename: 'pages/[name]/[name].bundle.[hash].js',
-    path: outputPath
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+    filename: 'js/[name].[hash].bundle.js',
+    chunkFilename: '[name].js'
+  },
+  resolve: {
+    alias: {
+      // layout: path.resolve(__dirname, '../src/layout/layout'),
+    }
   },
   // 加载器
   module: {
     rules: [
+      {
+        test: /\.pug$/,
+        use: [
+          // 允许文件作为字符串导入
+          {
+            loader: 'raw-loader'
+          },
+          {
+            loader: 'pug-plain-loader',
+            options: {
+              data: {
+                src: path.resolve(__dirname, '../src')
+              }
+            }
+          }
+        ]
+      },
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -82,7 +107,14 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['latest']
+            }
+          }
+        ]
       },
       // {
       //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -108,15 +140,18 @@ module.exports = {
   },
   // 插件
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
     // 将 css 抽取到某个文件夹
     new MiniCssExtractPlugin({
-      filename: 'pages/[name]/[name].css',
+      filename: 'css/[name].[contenthash].css',
       chunkFilename: '[id].css'
     }),
     // 拷贝static文件夹
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../src/static'),
+        from: path.resolve(__dirname, '../static'),
         to: staticSubDirectory,
         ignore: ['.*']
       }
