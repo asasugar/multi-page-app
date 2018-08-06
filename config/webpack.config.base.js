@@ -9,12 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 拷贝static
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 引入多页面文件列表
-const {
-  htmlDirs,
-  imgOutputPath,
-  staticSubDirectory,
-  outputPath
-} = require('./config')
+const { htmlDirs, staticSubDirectory } = require('./config')
 // 通过 html-webpack-plugin 生成的 HTML 集合
 let HTMLPlugins = []
 // 入口文件集合
@@ -35,7 +30,8 @@ htmlDirs.forEach(page => {
       removeComments: true, // 去除注释
       removeEmptyAttributes: true, // 去除空属性
       collapseWhitespace: true //是否去除空格
-    }
+    },
+    inject: true
   })
   HTMLPlugins.push(htmlPlugin)
   Entries[page] = path.resolve(__dirname, `../src/pages/${page}/${page}.js`)
