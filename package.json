@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open",
+    "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"

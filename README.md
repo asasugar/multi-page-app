@@ -2,6 +2,21 @@
 
 > 基于 webpack4.x 的多页应用脚手架（完善中......）
 
+## Build Setup
+
+```bash
+# install dependencies
+npm install
+or
+yarn
+
+# serve with hot reload at localhost:4396
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
 ## 使用指南
 
 ```bash
@@ -12,6 +27,8 @@
  static 引入方式: 使用相对路径引入（拷贝不打包）
 
  assets 图片引入方式: 背景图使用相对路径、img 使用：img(src="${require(`@/assets/s_rate_red_b.png`)}")（打包）
+
+ 默认打开页面通过设置devServer.openPage选项
 ```
 
 ## 文件树
@@ -63,20 +80,4 @@
 │  
 ├─js
 │ ├─jq.js
-```
-
-## Build Setup
-
-```bash
-# install dependencies
-npm install or yarn
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```

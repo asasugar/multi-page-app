@@ -25,8 +25,10 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     host: '0.0.0.0',
     useLocalIp: true,
-    inline: true,
-    port: 4396
+    port: 4396,
+    open: true,
+    openPage: '/html/pageOne.html',
+    inline: true
   }
 })
 
