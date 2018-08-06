@@ -1,13 +1,14 @@
 // 基础配置,包含了这些环境都可能使用到的配置
 'use strict'
 const webpack = require('webpack')
-const path = require('path')
 // 引入插件
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 // 抽取 css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 拷贝static
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { resolve } = require('./utils')
+
 // 引入多页面文件列表
 const { htmlDirs, staticSubDirectory } = require('./config')
 // 通过 html-webpack-plugin 生成的 HTML 集合
@@ -16,14 +17,11 @@ let HTMLPlugins = []
 let Entries = {}
 // node环境变量
 let env = process.env.NODE_ENV
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
 // 生成多页面的集合
 htmlDirs.forEach(page => {
   const htmlPlugin = new HTMLWebpackPlugin({
     filename: `html/${page}.html`,
-    template: path.resolve(__dirname, `../src/pages/${page}/${page}.pug`),
+    template: resolve(`src/pages/${page}/${page}.pug`),
     chunks: ['common', page],
     minify: {
       caseSensitive: false, //是否大小写敏感
@@ -34,7 +32,7 @@ htmlDirs.forEach(page => {
     inject: true
   })
   HTMLPlugins.push(htmlPlugin)
-  Entries[page] = path.resolve(__dirname, `../src/pages/${page}/${page}.js`)
+  Entries[page] = resolve(`src/pages/${page}/${page}.js`)
 })
 module.exports = {
   // 入口文件
@@ -43,7 +41,7 @@ module.exports = {
   devtool: env === 'prod' ? false : 'cheap-module-source-map',
   // 输出文件
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: resolve('dist'),
     publicPath: '/',
     filename: 'js/[name].[hash].bundle.js',
     chunkFilename: '[name].js'
@@ -51,7 +49,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.pug', 'scss'],
     alias: {
-      '@': path.resolve(__dirname, '../src')
+      '@': resolve('src')
     }
   },
   // 加载器
@@ -74,7 +72,7 @@ module.exports = {
             loader: 'pug-plain-loader',
             options: {
               data: {
-                src: path.resolve(__dirname, '../src')
+                src: resolve('src')
               }
             }
           }
@@ -155,7 +153,7 @@ module.exports = {
     // 拷贝static文件夹
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: resolve('static'),
         to: staticSubDirectory,
         ignore: ['.*']
       }

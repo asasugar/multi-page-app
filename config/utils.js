@@ -1,7 +1,17 @@
 'use strict'
 const path = require('path')
+const fs = require('fs')
 const packageConfig = require('../package.json')
 
+//返回当前path下的所有文件名组成的数组
+exports.getFileNameList = path => {
+  let htmlDirs = fs.readdirSync(path)
+  return htmlDirs
+}
+
+exports.resolve = dir => {
+  return path.join(__dirname, '..', dir)
+}
 exports.createNotifierCallback = () => {
   const notifier = require('node-notifier')
 
