@@ -28,7 +28,7 @@ npm run build
 
  assets 图片引入方式: 背景图使用相对路径、img 使用：img(src="${require(`@/assets/s_rate_red_b.png`)}")（打包）
 
- 默认打开页面通过设置devServer.openPage选项
+ 默认打开页面通过设置config/config.js中openPage选项
 ```
 
 ## 文件树

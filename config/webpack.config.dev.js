@@ -4,7 +4,7 @@ const ip = require('ip')
 const portfinder = require('portfinder')
 const webpackMerge = require('webpack-merge')
 const { createNotifierCallback } = require('./utils')
-const { outputPath } = require('./config') // 引入基础配置文件
+const { outputPath, openPage } = require('./config') // 引入基础配置文件
 const webpackBase = require('./webpack.config.base')
 
 // 合并配置文件
@@ -23,7 +23,7 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     useLocalIp: true,
     port: 4396,
     open: true,
-    openPage: '/html/pageOne.html',
+    openPage,
     inline: true,
     progress: true
   }
@@ -41,7 +41,7 @@ module.exports = new Promise((resolve, reject) => {
             messages: [
               `Your application is running here: http://${ip.address()}:${
                 devWebpackConfig.devServer.port
-              }/html/pageOne.html`
+              }${openPage}`
             ]
           },
           onErrors: createNotifierCallback()
