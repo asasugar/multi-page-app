@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --mode development --progress",
+    "build": "cross-env NODE_ENV=prod webpack --mode production",
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"
   },
@@ -28,6 +28,7 @@
     "chalk": "^2.4.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs": "^0.0.1-security",
