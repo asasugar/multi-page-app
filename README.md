@@ -17,7 +17,7 @@ npm run dev
 npm run build
 ```
 
-## 使用指南
+## 使用说明
 
 ```bash
  css: 采用 scss，并在配置中默认引入 CONST.scss，无需手动引入
@@ -43,6 +43,7 @@ npm run build
 │  
 ├─config
 │ config.js
+│ utils.js
 │ webpack.config.base.js
 │ webpack.config.dev.js
 │ webpack.config.prod.js
@@ -66,18 +67,20 @@ npm run build
 │ │ ├─pageTwo.pug
 │ │ ├─pageTwo.scss
 │ │  
-│ └─utils
-│ ├─css
-│ │ ├─CONST.scss
-│ │  
-│ └─js
+│ ├─utils
+│ │  │
+│ ├──css
+│ │  ├─CONST.scss
+│ │  │
+│ └─ js
 └─static
-├─css
-│ ├─bs.css
-│  
-├─img
-│ ├─s_rate_red_b.png
-│  
-├─js
-│ ├─jq.js
+│   │
+├──css
+│   ├─bs.css
+│   │
+├──img
+│   ├─s_rate_red_b.png
+│   │
+├──js
+│   ├─jq.js
 ```
