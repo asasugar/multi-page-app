@@ -28,7 +28,6 @@ htmlDirs.forEach(page => {
 })
 module.exports = {
   entry: Entries, // 入口文件
-  devtool: env === 'prod' ? false : 'cheap-module-source-map', // 启用 sourceMap
   // 输出文件
   output: {
     path: outputPath,

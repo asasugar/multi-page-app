@@ -9,6 +9,8 @@ const webpackBase = require('./webpack.config.base')
 
 // 合并配置文件
 const devWebpackConfig = webpackMerge(webpackBase, {
+  mode: 'development',
+  devtool: 'cheap-module-source-map', // 启用 sourceMap
   devServer: {
     contentBase: outputPath, // 项目根目录,内存中的dist文件
     overlay: {
@@ -22,7 +24,8 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     port: 4396,
     open: true,
     openPage: '/html/pageOne.html',
-    inline: true
+    inline: true,
+    progress: true
   }
 })
 
