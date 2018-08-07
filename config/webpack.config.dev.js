@@ -1,24 +1,18 @@
 'use strict'
-const { createNotifierCallback, resolve } = require('./utils')
-const path = require('path')
-// 引入基础配置文件
-const webpackBase = require('./webpack.config.base')
-// 引入 webpack-merge 插件
-const webpackMerge = require('webpack-merge')
-// 引入friendly-errors-webpack-plugin插件(需将其他报错提示关闭：{quiet:true})
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-// 引入ip插件
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin') // 引入friendly-errors-webpack-plugin插件(需将其他报错提示关闭：{quiet:true})
 const ip = require('ip')
 const portfinder = require('portfinder')
+const webpackMerge = require('webpack-merge')
+const { createNotifierCallback } = require('./utils')
+const { outputPath } = require('./config') // 引入基础配置文件
+const webpackBase = require('./webpack.config.base')
 
 // 合并配置文件
 const devWebpackConfig = webpackMerge(webpackBase, {
-  // 配置 webpack-dev-server
   devServer: {
-    // 项目根目录,内存中的dist文件
-    contentBase: resolve('dist'),
-    // 错误、警告展示设置
+    contentBase: outputPath, // 项目根目录,内存中的dist文件
     overlay: {
+      // 错误、警告展示设置
       errors: true,
       warnings: false
     },
@@ -50,7 +44,6 @@ module.exports = new Promise((resolve, reject) => {
           onErrors: createNotifierCallback()
         })
       )
-
       resolve(devWebpackConfig)
     }
   })

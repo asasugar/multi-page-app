@@ -9,7 +9,7 @@ exports.getFileNameList = path => {
   return htmlDirs
 }
 
-exports.resolve = dir => {
+exports.resolvePath = dir => {
   return path.join(__dirname, '..', dir)
 }
 exports.createNotifierCallback = () => {

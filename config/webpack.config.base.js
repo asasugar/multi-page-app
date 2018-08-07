@@ -1,27 +1,19 @@
 // 基础配置,包含了这些环境都可能使用到的配置
 'use strict'
 const webpack = require('webpack')
-// 引入插件
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-// 抽取 css
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// 拷贝static
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { resolve } = require('./utils')
-
-// 引入多页面文件列表
-const { htmlDirs, staticSubDirectory } = require('./config')
-// 通过 html-webpack-plugin 生成的 HTML 集合
-let HTMLPlugins = []
-// 入口文件集合
-let Entries = {}
-// node环境变量
-let env = process.env.NODE_ENV
-// 生成多页面的集合
+const HTMLWebpackPlugin = require('html-webpack-plugin') // 生成html
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽取 css
+const CopyWebpackPlugin = require('copy-webpack-plugin') // 拷贝static
+const { resolvePath } = require('./utils')
+const { htmlDirs, outputPath } = require('./config') // 引入多页面文件列表
+let HTMLPlugins = [] // 通过 html-webpack-plugin 生成的 HTML 集合
+let Entries = {} // 入口文件集合
+let env = process.env.NODE_ENV // node环境变量
 htmlDirs.forEach(page => {
+  // 生成多页面的集合
   const htmlPlugin = new HTMLWebpackPlugin({
     filename: `html/${page}.html`,
-    template: resolve(`src/pages/${page}/${page}.pug`),
+    template: resolvePath(`src/pages/${page}/${page}.pug`),
     chunks: ['common', page],
     minify: {
       caseSensitive: false, //是否大小写敏感
@@ -32,16 +24,14 @@ htmlDirs.forEach(page => {
     inject: true
   })
   HTMLPlugins.push(htmlPlugin)
-  Entries[page] = resolve(`src/pages/${page}/${page}.js`)
+  Entries[page] = resolvePath(`src/pages/${page}/${page}.js`)
 })
 module.exports = {
-  // 入口文件
-  entry: Entries,
-  // 启用 sourceMap
-  devtool: env === 'prod' ? false : 'cheap-module-source-map',
+  entry: Entries, // 入口文件
+  devtool: env === 'prod' ? false : 'cheap-module-source-map', // 启用 sourceMap
   // 输出文件
   output: {
-    path: resolve('dist'),
+    path: outputPath,
     publicPath: '/',
     filename: 'js/[name].[hash].bundle.js',
     chunkFilename: '[name].js'
@@ -49,7 +39,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.pug', 'scss'],
     alias: {
-      '@': resolve('src')
+      '@': resolvePath('src')
     }
   },
   // 加载器
@@ -58,10 +48,6 @@ module.exports = {
       {
         test: /\.pug$/,
         use: [
-          // 允许文件作为字符串导入
-          // {
-          //   loader: 'raw-loader'
-          // },
           {
             loader: 'html-loader',
             options: {
@@ -72,7 +58,7 @@ module.exports = {
             loader: 'pug-plain-loader',
             options: {
               data: {
-                src: resolve('src')
+                src: resolvePath('src')
               }
             }
           }
@@ -100,7 +86,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: resolve('src/utils/css/CONST.scss')
+              resources: resolvePath('src/utils/css/CONST.scss')
             }
           }
         ]
@@ -119,23 +105,26 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 100000,
-              name: 'static/[name].[ext]'
-            }
-          }
-        ]
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/img/[name].[hash:7].[ext]'
+        }
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            outputPath: 'font'
-          }
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:7].[ext]'
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/fonts/[name].[hash:7].[ext]'
         }
       }
     ]
@@ -153,8 +142,8 @@ module.exports = {
     // 拷贝static文件夹
     new CopyWebpackPlugin([
       {
-        from: resolve('static'),
-        to: staticSubDirectory,
+        from: resolvePath('static'),
+        to: 'static',
         ignore: ['.*']
       }
     ]),

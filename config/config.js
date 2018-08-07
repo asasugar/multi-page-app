@@ -1,10 +1,8 @@
 // 全局配置
 'use strict'
-const { getFileNameList, resolve } = require('./utils')
+const { getFileNameList, resolvePath } = require('./utils')
 
 module.exports = {
-  htmlDirs: getFileNameList(resolve('src/pages')),
-  devServerOutputPath: '../dist',
-  outputPath: resolve('dist'),
-  staticSubDirectory: 'static'
+  htmlDirs: getFileNameList(resolvePath('src/pages')),
+  outputPath: resolvePath('dist')
 }
