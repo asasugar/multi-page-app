@@ -38,7 +38,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.pug', 'scss'],
     alias: {
-      '@': resolvePath('src')
+      '@': resolvePath('src'),
+      utils: '@/utils'
     }
   },
   // 加载器

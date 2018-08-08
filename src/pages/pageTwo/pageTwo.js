@@ -1,2 +1,5 @@
 import './pageTwo.scss'
-console.log(4)
+import { getLocalStorage } from 'utils/js/localStorage'
+
+var d = getLocalStorage('test')
+console.log(d)

@@ -71,8 +71,10 @@ npm run build
 │ │  │
 │ ├──css
 │ │  ├─CONST.scss
-│ │  │
-│ └─ js
+│ │  
+│ └──js
+│    ├─localStorage.js
+│
 └─static
 │   │
 ├──css
