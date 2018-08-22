@@ -6,6 +6,7 @@ const webpackMerge = require('webpack-merge')
 const { createNotifierCallback } = require('./utils')
 const { outputPath, openPage } = require('./config') // 引入基础配置文件
 const webpackBase = require('./webpack.config.base')
+const package = require('../package.json')
 
 // 合并配置文件
 const devWebpackConfig = webpackMerge(webpackBase, {
@@ -21,7 +22,7 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     host: '0.0.0.0',
     useLocalIp: true,
-    port: 4396,
+    port: package.prot,
     open: true,
     openPage,
     inline: true,
