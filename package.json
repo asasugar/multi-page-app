@@ -1,6 +1,7 @@
 {
   "name": "multi-page-app",
   "version": "1.0.0",
+  "author": "",
   "description": "",
   "private": true,
   "scripts": {
@@ -9,16 +10,8 @@
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xxj95719/multi-page-app.git"
-  },
-  "author": "",
+  "port": "8080",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/xxj95719/multi-page-app/issues"
-  },
-  "homepage": "https://github.com/xxj95719/multi-page-app#readme",
   "devDependencies": {
     "autoprefixer": "^9.0.1",
     "babel-core": "^6.26.3",
