@@ -28,7 +28,7 @@ module.exports = {
   output: {
     path: outputPath,
     publicPath: '/',
-    filename: 'js/[name].[hash].bundle.js',
+    filename: 'js/[name].bundle.js',
     chunkFilename: '[name].js'
   },
   resolve: {
@@ -78,6 +78,10 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(htm|html)$/i,
+        use: ['html-withimg-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
