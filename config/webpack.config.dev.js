@@ -6,23 +6,21 @@ const webpackMerge = require('webpack-merge')
 const { createNotifierCallback } = require('./utils')
 const { outputPath, openPage } = require('./config') // 引入基础配置文件
 const webpackBase = require('./webpack.config.base')
-const package = require('../package.json')
+const Package = require('../package.json')
 
-// 合并配置文件
 const devWebpackConfig = webpackMerge(webpackBase, {
   mode: 'development',
-  devtool: 'cheap-module-source-map', // 启用 sourceMap
+  devtool: 'cheap-module-source-map',
   devServer: {
-    contentBase: outputPath, // 项目根目录,内存中的dist文件
+    contentBase: outputPath,
     overlay: {
-      // 错误、警告展示设置
       errors: true,
       warnings: false
     },
-    quiet: true, // necessary for FriendlyErrorsPlugin
+    quiet: true,
     host: '0.0.0.0',
     useLocalIp: true,
-    port: package.prot,
+    port: Package.prot,
     open: true,
     openPage,
     inline: true,
@@ -35,7 +33,6 @@ module.exports = new Promise((resolve, reject) => {
     if (err) {
       reject(err)
     } else {
-      // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {

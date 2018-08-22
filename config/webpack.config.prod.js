@@ -1,25 +1,22 @@
 'use strict'
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin') //引入js压缩插件
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpackMerge = require('webpack-merge')
-const CleanWebpackPlugin = require('clean-webpack-plugin') // 清理 dist 文件夹
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin') // 引入css压缩插件
-const webpackBase = require('./webpack.config.base') // 引入基础配置
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const webpackBase = require('./webpack.config.base')
 const { resolvePath } = require('./utils')
 
-// 合并配置文件
 module.exports = webpackMerge(webpackBase, {
   mode: 'production',
   plugins: [
-    // 自动清理 dist 文件夹
     new CleanWebpackPlugin(['dist'], {
-      root: resolvePath('/'), //根目录
-      verbose: true, //开启在控制台输出信息
-      dry: false //启用删除文件
+      root: resolvePath('/'),
+      verbose: true,
+      dry: false
     })
   ],
   optimization: {
     minimizer: [
-      // webpack4.x版本 --mode production自动压缩js
       new UglifyJsPlugin({
         cache: true,
         parallel: true,

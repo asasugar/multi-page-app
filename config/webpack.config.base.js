@@ -1,25 +1,22 @@
-// 基础配置,包含了这些环境都可能使用到的配置
 'use strict'
 const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin') // 生成html
-const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽取 css
-const CopyWebpackPlugin = require('copy-webpack-plugin') // 拷贝static
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { resolvePath } = require('./utils')
-const { htmlDirs, outputPath } = require('./config') // 引入多页面文件列表
-let HTMLPlugins = [] // 通过 html-webpack-plugin 生成的 HTML 集合
-let Entries = {} // 入口文件集合
-let env = process.env.NODE_ENV // node环境变量
+const { htmlDirs, outputPath } = require('./config')
+let HTMLPlugins = []
+let Entries = {}
 htmlDirs.forEach(page => {
-  // 生成多页面的集合
   const htmlPlugin = new HTMLWebpackPlugin({
     filename: `html/${page}.html`,
-    template: resolvePath(`src/pages/${page}/${page}.pug`),
+    template: resolvePath(`src/pages/${page}/${page}.html`),
     chunks: ['common', page],
     minify: {
-      caseSensitive: false, //是否大小写敏感
-      removeComments: true, // 去除注释
-      removeEmptyAttributes: true, // 去除空属性
-      collapseWhitespace: true //是否去除空格
+      caseSensitive: false,
+      removeComments: true,
+      removeEmptyAttributes: true,
+      collapseWhitespace: true
     },
     inject: true
   })
@@ -27,8 +24,7 @@ htmlDirs.forEach(page => {
   Entries[page] = resolvePath(`src/pages/${page}/${page}.js`)
 })
 module.exports = {
-  entry: Entries, // 入口文件
-  // 输出文件
+  entry: Entries,
   output: {
     path: outputPath,
     publicPath: '/',
@@ -36,34 +32,14 @@ module.exports = {
     chunkFilename: '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.pug', 'scss'],
+    extensions: ['.js', '.css', 'scss'],
     alias: {
       '@': resolvePath('src'),
       utils: '@/utils'
     }
   },
-  // 加载器
   module: {
     rules: [
-      {
-        test: /\.pug$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              interpolate: true
-            }
-          },
-          {
-            loader: 'pug-plain-loader',
-            options: {
-              data: {
-                src: resolvePath('src')
-              }
-            }
-          }
-        ]
-      },
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -129,17 +105,14 @@ module.exports = {
       }
     ]
   },
-  // 插件
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
-    // 将 css 抽取到某个文件夹
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: '[id].css'
     }),
-    // 拷贝static文件夹
     new CopyWebpackPlugin([
       {
         from: resolvePath('static'),
@@ -147,7 +120,6 @@ module.exports = {
         ignore: ['.*']
       }
     ]),
-    // 自动生成 HTML 插件
     ...HTMLPlugins
   ]
 }
