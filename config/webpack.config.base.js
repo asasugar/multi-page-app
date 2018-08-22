@@ -64,6 +64,11 @@ module.exports = {
           }
         ]
       },
+      // 解决html模板img标签无法被webpack打包
+      {
+        test: /\.(htm|html)$/i,
+        use: ['html-withimg-loader']
+      },
       {
         test: /\.css$/,
         exclude: /node_modules/,

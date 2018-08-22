@@ -2877,7 +2877,7 @@ html-webpack-plugin@^3.2.0:
 
 html-withimg-loader@^0.1.16:
   version "0.1.16"
-  resolved "http://registry.npm.taobao.org/html-withimg-loader/download/html-withimg-loader-0.1.16.tgz#76ff5b0833b48e4aeca38582c08f8d0b293c834d"
+  resolved "https://registry.npmjs.org/html-withimg-loader/-/html-withimg-loader-0.1.16.tgz#76ff5b0833b48e4aeca38582c08f8d0b293c834d"
   dependencies:
     loader-utils "^0.2.15"
     path "^0.12.7"
