@@ -42,7 +42,7 @@ module.exports = new Promise((resolve, reject) => {
             messages: [
               `Your application is running here: http://${ip.address()}:${
                 devWebpackConfig.devServer.port
-              }${openPage}`
+              }/${openPage}`
             ]
           },
           onErrors: createNotifierCallback()
