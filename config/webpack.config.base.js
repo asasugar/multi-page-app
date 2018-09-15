@@ -10,21 +10,23 @@ let HTMLPlugins = [] // 通过 html-webpack-plugin 生成的 HTML 集合
 let Entries = {} // 入口文件集合
 let env = process.env.NODE_ENV // node环境变量
 htmlDirs.forEach(page => {
-  // 生成多页面的集合
-  const htmlPlugin = new HTMLWebpackPlugin({
-    filename: `html/${page}.html`,
-    template: resolvePath(`src/pages/${page}/${page}.pug`),
-    chunks: ['common', page],
-    minify: {
-      caseSensitive: false, //是否大小写敏感
-      removeComments: true, // 去除注释
-      removeEmptyAttributes: true, // 去除空属性
-      collapseWhitespace: true //是否去除空格
-    },
-    inject: true
-  })
-  HTMLPlugins.push(htmlPlugin)
-  Entries[page] = resolvePath(`src/pages/${page}/${page}.js`)
+  if (page !== 'layout') {
+    // 生成多页面的集合
+    const htmlPlugin = new HTMLWebpackPlugin({
+      filename: `html/${page}.html`,
+      template: resolvePath(`src/pages/${page}/${page}.pug`),
+      chunks: ['common', page],
+      minify: {
+        caseSensitive: false, //是否大小写敏感
+        removeComments: true, // 去除注释
+        removeEmptyAttributes: true, // 去除空属性
+        collapseWhitespace: true //是否去除空格
+      },
+      inject: true
+    })
+    HTMLPlugins.push(htmlPlugin)
+    Entries[page] = resolvePath(`src/pages/${page}/${page}.js`)
+  }
 })
 module.exports = {
   entry: Entries, // 入口文件
