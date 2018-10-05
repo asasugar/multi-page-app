@@ -24,7 +24,7 @@ npm run build
 
  模板: 采用 pug，[layout]文件为公用部分
 
- localStorage使用: setLocalStorage(key,val) | getLocalStorage(key)
+ localStorage: setLocalStorage(key,val) | getLocalStorage(key)
 
  static 引入方式: 使用相对路径引入（拷贝不打包）
 
