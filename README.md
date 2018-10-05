@@ -24,6 +24,8 @@ npm run build
 
  static 引入方式: 使用相对路径引入（拷贝不打包）
 
+ localStorage: setLocalStorage(key,val) | getLocalStorage(key)
+
  assets 图片引入方式: 背景图使用相对路径、img 使用：<img src="../../assets/s_rate_red_1.png">（打包）
 
  --open页面通过设置config/config.js中openPage选项

@@ -20,8 +20,7 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     quiet: true,
     host: '0.0.0.0',
     useLocalIp: true,
-    port: Package.prot,
-    open: true,
+    port: Package.port,
     openPage,
     inline: true,
     progress: true
@@ -45,6 +44,7 @@ module.exports = new Promise((resolve, reject) => {
           onErrors: createNotifierCallback()
         })
       )
+      devWebpackConfig.devServer.open = true
       resolve(devWebpackConfig)
     }
   })
