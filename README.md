@@ -24,6 +24,8 @@ npm run build
 
  模板: 采用 pug，[layout]文件为公用部分
 
+ localStorage: setLocalStorage(key,val) | getLocalStorage(key)
+
  static 引入方式: 使用相对路径引入（拷贝不打包）
 
  assets 图片引入方式: 背景图使用相对路径、img 使用：img(src="${require(`@/assets/s_rate_red_b.png`)}")（打包）
@@ -40,38 +42,38 @@ npm run build
 │ README.md
 │ webpack.config.js
 │ yarn.lock
-│  
+│
 ├─config
 │ config.js
 │ utils.js
 │ webpack.config.base.js
 │ webpack.config.dev.js
 │ webpack.config.prod.js
-│  
+│
 ├─src
 │ ├─assets
 │ │ s_rate_red_b.png
-│ │  
+│ │
 │ ├─pages
 │ │ ├─layout
 │ │ │ ├─layout.js
 │ │ │ ├─layout.pug
-│ │ │  
+│ │ │
 │ │ ├─pageOne
 │ │ │ ├─pageOne.js
 │ │ │ ├─pageOne.pug
 │ │ │ ├─pageOne.scss
-│ │ │  
+│ │ │
 │ │ └─pageTwo
 │ │ ├─pageTwo.js
 │ │ ├─pageTwo.pug
 │ │ ├─pageTwo.scss
-│ │  
+│ │
 │ ├─utils
 │ │  │
 │ ├──css
 │ │  ├─CONST.scss
-│ │  
+│ │
 │ └──js
 │    ├─localStorage.js
 │
