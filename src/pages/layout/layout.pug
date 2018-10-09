@@ -3,7 +3,14 @@ head
     meta(name="viewport",content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible",content="ie=edge")
     title multi-page-app
-    link(rel="stylesheet",href="/static/css/bs.css")
+    link(rel="icon",href="/static/favicon.ico")
+    link(rel="stylesheet",href="/static/css/common.css")
+
 body
-    block content
-    script(src='/static/js/jq.js')
+    div#app
+        div#nav
+            a(href="./Home.html") Home | 
+            a(href="./About.html") About
+        block content
+
+script(src='/static/js/common.js')

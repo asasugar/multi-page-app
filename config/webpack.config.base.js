@@ -5,15 +5,15 @@ const HTMLWebpackPlugin = require('html-webpack-plugin') // 生成html
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽取 css
 const CopyWebpackPlugin = require('copy-webpack-plugin') // 拷贝static
 const { resolvePath } = require('./utils')
-const { htmlDirs, outputPath } = require('./config') // 引入多页面文件列表
+const { baseUrl, htmlDirs, outputPath } = require('./config') // 引入多页面文件列表
 let HTMLPlugins = [] // 通过 html-webpack-plugin 生成的 HTML 集合
 let Entries = {} // 入口文件集合
-let env = process.env.NODE_ENV // node环境变量
 htmlDirs.forEach(page => {
-  if (page !== 'layout') {
+  if (page !== 'Layout') {
     // 生成多页面的集合
+    let basePath = baseUrl ? `${baseUrl}/` : baseUrl
     const htmlPlugin = new HTMLWebpackPlugin({
-      filename: `html/${page}.html`,
+      filename: `${basePath}${page}.html`,
       template: resolvePath(`src/pages/${page}/${page}.pug`),
       chunks: ['common', page],
       minify: {

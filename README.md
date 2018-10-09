@@ -20,6 +20,8 @@ npm run build
 ## 使用说明
 
 ```bash
+ baseUrl: 默认基于根目录，需要修改请到config/config.js中修改
+
  css: 采用 scss，并在配置中默认引入 CONST.scss，无需手动引入
 
  模板: 采用 pug，[layout]文件为公用部分

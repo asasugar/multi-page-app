@@ -10,7 +10,7 @@
     "serve": "http-server ./dist -p 8888 -o",
     "serve2": "http-server ./dist -p 8888"
   },
-  "port": "8080",
+  "port": "8023",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^9.0.1",
@@ -23,6 +23,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs": "^0.0.1-security",
     "html-loader": "^0.5.5",
