@@ -4,12 +4,13 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { resolvePath } = require('./utils')
-const { htmlDirs, outputPath } = require('./config')
+const { baseUrl, htmlDirs, outputPath } = require('./config')
 let HTMLPlugins = []
 let Entries = {}
 htmlDirs.forEach(page => {
+  let basePath = baseUrl ? `${baseUrl}/` : baseUrl
   const htmlPlugin = new HTMLWebpackPlugin({
-    filename: `html/${page}.html`,
+    filename: `${basePath}${page}.html`,
     template: resolvePath(`src/pages/${page}/${page}.html`),
     chunks: ['common', page],
     minify: {
