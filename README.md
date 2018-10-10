@@ -54,22 +54,22 @@ npm run build
 │
 ├─src
 │ ├─assets
-│ │ s_rate_red_b.png
+│ │ logo.png
 │ │
 │ ├─pages
-│ │ ├─layout
-│ │ │ ├─layout.js
-│ │ │ ├─layout.pug
+│ │ ├─Layout
+│ │ │ ├─Layout.js
+│ │ │ ├─Layout.pug
 │ │ │
-│ │ ├─pageOne
-│ │ │ ├─pageOne.js
-│ │ │ ├─pageOne.pug
-│ │ │ ├─pageOne.scss
+│ │ ├─About
+│ │ │ ├─About.js
+│ │ │ ├─About.pug
+│ │ │ ├─About.scss
 │ │ │
-│ │ └─pageTwo
-│ │ ├─pageTwo.js
-│ │ ├─pageTwo.pug
-│ │ ├─pageTwo.scss
+│ │ └─Home
+│ │   ├─Home.js
+│ │   ├─Home.pug
+│ │   ├─Home.scss
 │ │
 │ ├─utils
 │ │  │
