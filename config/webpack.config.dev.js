@@ -23,7 +23,8 @@ const devWebpackConfig = webpackMerge(webpackBase, {
     port: Package.port,
     openPage: baseUrl ? `${baseUrl}/${openPage}` : openPage,
     inline: true,
-    progress: true
+    open: true,
+    progress: false
   }
 })
 
@@ -45,7 +46,6 @@ module.exports = new Promise((resolve, reject) => {
           onErrors: createNotifierCallback()
         })
       )
-      devWebpackConfig.devServer.open = true
       resolve(devWebpackConfig)
     }
   })
